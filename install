@@ -5,7 +5,7 @@ CONFIG_DIR="$HOME/.basic_config"
 
 if [ ! -d "$CONFIG_DIR" ];
 then
-    git clone https://github.com/arthurdarcet/config.git "$CONFIG_DIR"
+    git clone http://github.com/arthurdarcet/dotfiles.git "$CONFIG_DIR"
 fi
 
 cd "$CONFIG_DIR"
