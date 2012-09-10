@@ -1,0 +1,28 @@
+[gc]
+    auto = 1
+[user]
+    name = Arthur Darcet
+    email = arthur.darcet@m4x.org
+[color]
+    ui = true
+[color "diff"]
+    whitespace = red reverse
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    dc = diff --cached
+    lg = log -p
+    lo = log --graph --decorate --pretty=oneline --abbrev-commit -n 10
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    ls = ls-files
+    # Show files ignored by git:
+    ign = ls-files -o -i --exclude-standard
+    amend = commit --amend -C HEAD
+[branch]
+    autosetuprebase = always

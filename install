@@ -1,0 +1,21 @@
+#!/bin/sh
+
+pwd=`pwd`
+CONFIG_DIR="$HOME/.basic_config"
+
+if [ ! -d "$CONFIG_DIR" ];
+then
+    git clone https://github.com/arthurdarcet/config.git "$CONFIG_DIR"
+fi
+
+cd "$CONFIG_DIR"
+
+for i in `git ls-files`
+do
+    if [ "$i" != "install" ];
+    then
+        cp -rv --parents "$i" "$HOME/"
+    fi
+done
+
+cd $pwd
