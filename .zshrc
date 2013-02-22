@@ -1,9 +1,12 @@
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="my"
+# DISABLE_AUTO_UPDATE="true"
+# DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="true"
 
-export BASIC_CONFIG_DIR="$HOME/.basic_config"
-alias update_basic_config='cd "$BASIC_CONFIG_DIR" && git pull && $BASIC_CONFIG_DIR/install'
+plugins=(git screen django)
+source $ZSH/oh-my-zsh.sh
+
 
 alias cd='pushd'
 setopt PUSHD_SILENT
@@ -28,25 +31,24 @@ alias mount="mount -v"
 alias umount="umount -v"
 
 alias h='history'
-alias s='sudo -s '
+alias s='sudo -s'
 
 alias grep="grep --color=always"
 alias df="df -h"
 alias dm1="du -h --max-depth=1"
 alias dm2="du -h --max-depth=2"
 
-# No correction here
 alias mv='nocorrect mv -vi'
 alias cp='nocorrect cp -vi'
 alias mkdir='nocorrect mkdir -v'
-alias scp='nocorrect scp'
+alias scp='rsync -aPvh --delete-after --fuzzy'
 
-alias pacman='pacman-color'
+alias trn='mosh -p 10022 trn --server="LANG=en_US.UTF-8 mosh-server"'
 
-DISABLE_AUTO_UPDATE="true"
-DISABLE_AUTO_TITLE="true"
-COMPLETION_WAITING_DOTS="true"
+export BASIC_CONFIG_DIR="$HOME/.basic_config"
+alias update_basic_config='cd "$BASIC_CONFIG_DIR" && git pull && $BASIC_CONFIG_DIR/install'
 
-plugins=(git django)
+export LANG=en_US.UTF-8
+export EDITOR=nano
 
-source $ZSH/oh-my-zsh.sh
+screen -r irc
