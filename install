@@ -13,9 +13,19 @@ cd "$CONFIG_DIR"
 
 for i in `git ls-files`
 do
-    if [ "$i" != "install" ];
-    then
-        $CP -r --parents "$i" "$HOME/"
+    doit=`[ "$i" != "install" ] && echo 1 || echo 0`
+    if [ -f "$HOME/$i" ]; then
+        diff=`diff "$HOME/$i" "$i"`
+        ret=$?
+        if [ ! "$ret" == "0" ]; then
+            echo $diff
+            echo "$(tput setaf 3)$i modified locally, override ?$(tput sgr0) [y/N]"
+            read rep
+            doit=`[ "$rep" == "y" ] && echo 1 || echo 0`
+        fi
+    fi
+    if [ "$doit" == "1" ]; then
+        $CP "$i" "$HOME/"
     fi
 done
 
