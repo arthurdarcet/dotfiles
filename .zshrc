@@ -48,6 +48,12 @@ alias trn='mosh -p 10022 trn --server="LANG=en_US.UTF-8 mosh-server"'
 export BASIC_CONFIG_DIR="$HOME/.basic_config"
 alias update_basic_config='cd "$BASIC_CONFIG_DIR" && git pull && $BASIC_CONFIG_DIR/install'
 
+function upload() {
+  dest=$(echo "$1" | sed 's, ,_,g')
+  scp "$1" darcet.fr:"~/public_html/$dest"
+  echo "$(tput setaf 3)Uploaded to$(tput sgr0): $(tput bold)http://$USER.darcet.fr/$dest"
+}
+
 export LANG=en_US.UTF-8
 export EDITOR=nano
 
