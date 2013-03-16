@@ -24,7 +24,8 @@ do
         fi
     fi
     if [ "$doit" == "1" ]; then
-        $CP "$i" "$HOME/"
+        # --parents copy $i into $HOME/$i (otherwise everything would end up in the $HOME dir
+        cp --parents "$i" "$HOME/"
     fi
 done
 
