@@ -9,6 +9,7 @@
     whitespace = red reverse
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    pager = less -F -X
 [alias]
     st = status
     ci = commit
@@ -26,3 +27,5 @@
     amend = commit --amend -C HEAD
 [branch]
     autosetuprebase = always
+[push]
+    default = simple
