@@ -25,6 +25,7 @@
     # Show files ignored by git:
     ign = ls-files -o -i --exclude-standard
     amend = commit --amend -C HEAD
+    fixup = !sh -c 'git commit --fixup=$1 && git rebase -i --autosquash "$1^"' -
 [branch]
     autosetuprebase = always
 [push]
