@@ -53,6 +53,9 @@ function upload() {
   scp "$1" darcet.fr:"~/public_html/$dest"
   echo "$(tput setaf 3)Uploaded to$(tput sgr0): $(tput bold)http://$USER.darcet.fr/$dest"
 }
+if which hub >/dev/null; then
+    alias git='hub'
+fi
 
 export LANG=en_US.UTF-8
 export EDITOR=nano
