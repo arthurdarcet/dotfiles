@@ -1,7 +1,9 @@
-ZSH=$HOME/.oh-my-zsh
+export BASIC_CONFIG_DIR="$HOME/.basic_config"
+
+ZSH=$BASIC_CONFIG_DIR/oh-my-zsh
 ZSH_THEME="my"
-# DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(git screen django)
@@ -45,7 +47,6 @@ alias scp='rsync -aPvh --delete-after --fuzzy'
 
 alias trn='mosh -p 10022 trn --server="LANG=en_US.UTF-8 mosh-server"'
 
-export BASIC_CONFIG_DIR="$HOME/.basic_config"
 alias update_basic_config='cd "$BASIC_CONFIG_DIR" && git pull && $BASIC_CONFIG_DIR/install'
 
 function upload() {
