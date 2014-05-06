@@ -1,13 +1,20 @@
-export BASIC_CONFIG_DIR="$HOME/.basic_config"
+BASIC_CONFIG_DIR="$HOME/.basic_config"
 
 ZSH=$BASIC_CONFIG_DIR/oh-my-zsh
 ZSH_THEME="my"
-# DISABLE_AUTO_TITLE="true"
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(git screen django)
 source $ZSH/oh-my-zsh.sh
+
+autoload up-line-or-beginning-search
+autoload down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "${key[Up]}"      ]]  && bindkey   "${key[Up]}"       up-line-or-beginning-search
+[[ -n "${key[Down]}"    ]]  && bindkey   "${key[Down]}"    down-line-or-beginning-search
 
 
 alias cd='pushd'
@@ -45,18 +52,13 @@ alias cp='nocorrect cp -vi'
 alias mkdir='nocorrect mkdir -v'
 alias scp='rsync -aPvh --delete-after --fuzzy'
 
-alias trn='mosh -p 10022 trn --server="LANG=en_US.UTF-8 mosh-server"'
-
-alias update_basic_config='cd "$BASIC_CONFIG_DIR" && git pull && $BASIC_CONFIG_DIR/install'
+alias update_basic_config='cd "$BASIC_CONFIG_DIR" && git pull && ./install'
 
 function upload() {
-  dest=$(echo "$1" | sed 's, ,_,g')
+  dest=$(echo "$(basename $1)" | sed 's, ,_,g')
   scp "$1" darcet.fr:"~/public_html/$dest"
   echo "$(tput setaf 3)Uploaded to$(tput sgr0): $(tput bold)http://$USER.darcet.fr/$dest"
 }
-if which hub >/dev/null; then
-    alias git='hub'
-fi
 
 export LANG=en_US.UTF-8
 export EDITOR=nano
