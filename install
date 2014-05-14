@@ -5,10 +5,9 @@ FILES=('.gitconfig' '.screenrc' '.zshrc')
 CONFIG_DIR="$HOME/.basic_config"
 CP="/bin/cp"
 
-if [ ! -d "$CONFIG_DIR" ];
-then
-    git clone http://github.com/arthurdarcet/dotfiles.git "$CONFIG_DIR"
-fi
+cd "$HOME"
+rm -r "$CONFIG_DIR"
+git clone http://github.com/arthurdarcet/dotfiles.git "$CONFIG_DIR"
 
 cd "$CONFIG_DIR"
 
@@ -25,7 +24,7 @@ do
         fi
     fi
     if [ "$doit" == "1" ]; then
-        # --parents copy $i into $HOME/$i (otherwise everything would end up in the $HOME dir
+        # --parents copy "a/b/c" into $HOME/a/b/c
         cp --parents "$i" "$HOME/"
     fi
 done
