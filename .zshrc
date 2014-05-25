@@ -8,6 +8,8 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git screen django)
 source $ZSH/oh-my-zsh.sh
 
+unsetopt AUTO_CD
+
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
 zle -N up-line-or-beginning-search
