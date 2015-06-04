@@ -26,6 +26,7 @@
     ign = ls-files -o -i --exclude-standard
     amend = commit --amend -C HEAD
     fixup = !sh -c 'git commit --fixup=$1 && git rebase -i --autosquash "$1^"' -
+    tp = !sh -c 'git commit -am $0 && git tag -a $0  -m $0 && git push && git push --tags'
 [branch]
     autosetuprebase = always
 [push]
