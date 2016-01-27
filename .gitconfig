@@ -1,8 +1,8 @@
-[gc]
-    auto = 1
 [user]
     name = Arthur Darcet
     email = arthur.darcet@m4x.org
+[gc]
+    auto = 1
 [color]
     ui = true
 [color "diff"]
@@ -10,6 +10,12 @@
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     pager = less -F -X
+[branch]
+    autosetuprebase = always
+[push]
+    default = simple
+[fetch]
+    prune = true
 [alias]
     st = status -sb
     ci = commit
@@ -27,19 +33,3 @@
     amend = commit --amend -C HEAD
     fixup = !sh -c 'git commit --fixup=$1 && git rebase -i --autosquash "$1^"' -
     tp = !sh -c 'git commit -am $0 && git tag -a $0  -m $0 && git push && git push --tags'
-[branch]
-    autosetuprebase = always
-[push]
-    default = simple
-[url "git@github.com:"]
-    insteadOf = "gh:"
-    pushInsteadOf = "github:"
-    pushInsteadOf = "git://github.com/"
-[url "git://github.com/"]
-    insteadOf = "github:"
-[url "git@gist.github.com:"]
-    insteadOf = "gst:"
-    pushInsteadOf = "gist:"
-    pushInsteadOf = "git://gist.github.com/"
-[url "git://gist.github.com/"]
-    insteadOf = "gist:"
