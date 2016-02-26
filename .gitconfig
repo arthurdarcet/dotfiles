@@ -33,3 +33,7 @@
     amend = commit --amend -C HEAD
     fixup = !sh -c 'git commit --fixup=$1 && git rebase -i --autosquash "$1^"' -
     tp = !sh -c 'git commit -am $0 && git tag -a $0  -m $0 && git push && git push --tags'
+    pb = !sh -c 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+    pr = !sh -c 'git pb && hub pull-request $@' -
+    pf = push --force-with-lease
+    
