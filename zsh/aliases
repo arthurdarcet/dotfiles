@@ -36,3 +36,6 @@ alias mv='nocorrect mv -vi'
 alias cp='nocorrect cp -vi'
 alias mkdir='nocorrect mkdir -v'
 alias scp='rsync -aPvh --delete-after --fuzzy'
+
+alias gp='git push'
+alias gl='git pull'
