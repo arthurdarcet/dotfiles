@@ -1,35 +1,40 @@
+autoload colors && colors
+setopt prompt_subst
+
 function git_prompt_info() {
-	ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-	ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+	ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+	ref=$(git rev-parse --short HEAD 2> /dev/null) || return
 
-	echo "%{$fg[blue]%}git:("
-	echo "%{$fg[red]%}${ref#refs/heads/}"
-	echo "%{$fg[blue]%}%)"
-
-	GIT_STATUS=$(command git status -s --ignore-submodules=dirty 2> /dev/null | tail -n1)
+	GIT_STATUS=$(git status --porcelain --ignore-submodules=dirty 2> /dev/null | tail -n1)
 	if [[ -n $GIT_STATUS ]]; then
-		echo "%{$fg[yellow]%}×"
+		COLOR=$fg[red]
+	else
+		COLOR=$fg[green]
 	fi
-	echo " "
+
+	echo -n "%{$fg_bold[blue]%}["
+	echo -n "%{$COLOR%}${ref#refs/heads/}"
+	echo -n "%{$fg_bold[blue]%}] "
 }
 
 function prompt() {
-	echo "%{$fg[magenta]%}%T "
+	echo -n "%{$fg[magenta]%}%T "
 	if [ "$USER" != "arthur" ]; then
-		echo "%{$fg[green]%}%n";
+		echo -n "%{$fg[green]%}%n";
 	fi;
-	echo "%{$reset_color%}@"
+	echo -n "%{$reset_color%}@"
 
 	if [ $UID -eq 0 ]; then
-		echo "%{$fg[red]%}"
+		echo -n "%{$fg[red]%}"
 	else
-		echo "%{$fg[blue]%}"
+		echo -n "%{$fg[blue]%}"
 	fi;
-	echo "%m "
-	echo "%{$fg[yellow]%}%~ "
+	echo -n "%m "
+	echo -n "%{$fg[yellow]%}%~ "
 
 	git_prompt_info
-	echo "%{$reset_color%}%#"
+	echo -n "%{$reset_color%}%# "
 }
 
-PROMPT="$(prompt)"
+PROMPT='$(prompt)'
+RPROMPT="%{$fg[gray]%}[%?]%{$reset_color%}"
