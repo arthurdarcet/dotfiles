@@ -4,7 +4,7 @@ function git_prompt_info() {
 
 	echo "%{$fg[blue]%}git:("
 	echo "%{$fg[red]%}${ref#refs/heads/}"
-	echo "%{$fg[blue]%})"
+	echo "%{$fg[blue]%}%)"
 
 	GIT_STATUS=$(command git status -s --ignore-submodules=dirty 2> /dev/null | tail -n1)
 	if [[ -n $GIT_STATUS ]]; then
@@ -29,7 +29,7 @@ function prompt() {
 	echo "%{$fg[yellow]%}%~ "
 
 	git_prompt_info
-	echo "%{$reset_color%}%%"
+	echo "%{$reset_color%}%#"
 }
 
 PROMPT="$(prompt)"
