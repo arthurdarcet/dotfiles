@@ -1,6 +1,8 @@
 autoload colors && colors
 setopt prompt_subst
 
+OWNER=$(ls -ld "${BASIC_CONFIG_DIR}/install" | awk '{print $3}')
+
 function git_prompt_info() {
 	ref=$(git symbolic-ref HEAD 2> /dev/null) || \
 	ref=$(git rev-parse --short HEAD 2> /dev/null) || return
@@ -19,7 +21,7 @@ function git_prompt_info() {
 
 function prompt() {
 	echo -n "%{$fg[magenta]%}%T "
-	if [ "$USER" != "arthur" ]; then
+	if [ "$USER" != "$OWNER" -a $USER != "root" ]; then
 		echo -n "%{$fg[green]%}%n";
 	fi;
 	echo -n "%{$reset_color%}@"
