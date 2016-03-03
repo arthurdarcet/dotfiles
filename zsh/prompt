@@ -1,0 +1,35 @@
+function git_prompt_info() {
+	ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+	ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+
+	echo "%{$fg[blue]%}git:("
+	echo "%{$fg[red]%}${ref#refs/heads/}"
+	echo "%{$fg[blue]%})"
+
+	GIT_STATUS=$(command git status -s --ignore-submodules=dirty 2> /dev/null | tail -n1)
+	if [[ -n $GIT_STATUS ]]; then
+		echo "%{$fg[yellow]%}×"
+	fi
+	echo " "
+}
+
+function prompt() {
+	echo "%{$fg[magenta]%}%T "
+	if [ "$USER" != "arthur" ]; then
+		echo "%{$fg[green]%}%n";
+	fi;
+	echo "%{$reset_color%}@"
+
+	if [ $UID -eq 0 ]; then
+		echo "%{$fg[red]%}"
+	else
+		echo "%{$fg[blue]%}"
+	fi;
+	echo "%m "
+	echo "%{$fg[yellow]%}%~ "
+
+	git_prompt_info
+	echo "%{$reset_color%}%%"
+}
+
+PROMPT="$(prompt)"

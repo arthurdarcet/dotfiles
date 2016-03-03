@@ -1,0 +1,12 @@
+function upload() {
+  dest=$(echo "$(basename $1)" | sed 's, ,_,g')
+  scp "$1" darcet.fr:"~/public_html/$dest"
+  echo "$(tput setaf 3)Uploaded to$(tput sgr0): $(tput bold)http://$USER.darcet.fr/$dest"
+}
+
+function update_basic_config() {
+	pushd "$BASIC_CONFIG_DIR"
+	git pull
+	./install
+	popd
+}
